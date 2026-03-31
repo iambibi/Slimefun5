@@ -224,7 +224,7 @@ public final class SlimefunUtils {
      *
      * @return An {@link ItemStack} with this Head texture
      */
-    public static @Nonnull ItemStack getCustomHead(@Nonnull String texture) throws UnknownServerVersionException {
+    public static @Nonnull ItemStack getCustomHead(@Nonnull String texture) {
         Validate.notNull(texture, "The provided texture is null");
 
         if (Slimefun.instance() == null) {
@@ -243,7 +243,11 @@ public final class SlimefunUtils {
         }
 
         PlayerSkin skin = PlayerSkin.fromBase64(base64);
-        return PlayerHead.getItemStack(skin);
+        try {
+            return PlayerHead.getItemStack(skin);
+        } catch (UnknownServerVersionException e) {
+            throw new RuntimeException("Failed to create a custom head item for texture: " + texture, e);
+        }
     }
 
     public static boolean containsSimilarItem(Inventory inventory, ItemStack item, boolean checkLore) {

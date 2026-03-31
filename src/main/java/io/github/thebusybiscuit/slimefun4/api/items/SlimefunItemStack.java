@@ -15,6 +15,7 @@ import java.util.function.UnaryOperator;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import io.github.bakedlibs.dough.versions.UnknownServerVersionException;
 import io.papermc.paper.inventory.ItemRarity;
 import io.papermc.paper.inventory.tooltip.TooltipContext;
 import io.papermc.paper.registry.set.RegistryKeySet;
@@ -285,7 +286,11 @@ public class SlimefunItemStack {
         }
 
         PlayerSkin skin = PlayerSkin.fromBase64(getTexture(id, texture));
-        return PlayerHead.getItemStack(skin);
+        try {
+            return PlayerHead.getItemStack(skin);
+        } catch (UnknownServerVersionException e) {
+            throw new RuntimeException("Failed to create a custom head item for texture: " + texture, e);
+        }
     }
 
     private static @Nonnull String getTexture(@Nonnull String id, @Nonnull String texture) {
