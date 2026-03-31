@@ -11,6 +11,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
+import io.github.bakedlibs.dough.versions.UnknownServerVersionException;
 import org.apache.commons.lang.Validate;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -223,7 +224,7 @@ public final class SlimefunUtils {
      *
      * @return An {@link ItemStack} with this Head texture
      */
-    public static @Nonnull ItemStack getCustomHead(@Nonnull String texture) {
+    public static @Nonnull ItemStack getCustomHead(@Nonnull String texture) throws UnknownServerVersionException {
         Validate.notNull(texture, "The provided texture is null");
 
         if (Slimefun.instance() == null) {
