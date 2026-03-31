@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import com.google.gson.JsonParser;
 import com.google.gson.JsonElement;
 
 class TestWikiResource {
@@ -23,7 +24,7 @@ class TestWikiResource {
 
         // Here we test for any Syntax errors in our wiki.json file
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream("/wiki.json"), StandardCharsets.UTF_8))) {
-            JsonElement json = JsonUtils.parseString(reader.lines().collect(Collectors.joining("")));
+            JsonElement json = JsonParser.parseString(reader.lines().collect(Collectors.joining("")));
             Assertions.assertTrue(json.isJsonObject());
 
             for (Map.Entry<String, JsonElement> entry : json.getAsJsonObject().entrySet()) {

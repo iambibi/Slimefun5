@@ -34,7 +34,7 @@ jobs:
           project: Slimefun4
           releaseChannel: Dev
           apiToken: ${{ secrets.BLOB_BUILDS_API_TOKEN }}
-          file: './target/Slimefun v4.9-UNOFFICIAL.jar'
+          file: './target/Slimefun v5-UNOFFICIAL.jar'
           releaseNotes: ${{ github.event.head_commit.message }}
 
       - name: Upload RC build
@@ -44,7 +44,7 @@ jobs:
           project: Slimefun4
           releaseChannel: 'RC'
           apiToken: ${{ secrets.BLOB_BUILDS_API_TOKEN }}
-          file: './target/Slimefun v4.9-UNOFFICIAL.jar'
+          file: './target/Slimefun v5-UNOFFICIAL.jar'
           releaseNotes: ${{ github.event.head_commit.message }}
     
       - name: Upload Experimental build
@@ -54,5 +54,5 @@ jobs:
           project: Slimefun4
           releaseChannel: 'Experimental'
           apiToken: ${{ secrets.BLOB_BUILDS_API_TOKEN }}
-          file: './target/Slimefun v4.9-UNOFFICIAL.jar'
+          file: './target/Slimefun v5-UNOFFICIAL.jar'
           releaseNotes: ${{ github.event.head_commit.message }}
