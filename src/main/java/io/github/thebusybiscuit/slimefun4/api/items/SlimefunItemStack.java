@@ -286,11 +286,7 @@ public class SlimefunItemStack {
         }
 
         PlayerSkin skin = PlayerSkin.fromBase64(getTexture(id, texture));
-        try {
-            return PlayerHead.getItemStack(skin);
-        } catch (UnknownServerVersionException e) {
-            throw new RuntimeException("Failed to create a custom head item for texture: " + texture, e);
-        }
+        return PlayerHead.getItemStack(skin);
     }
 
     private static @Nonnull String getTexture(@Nonnull String id, @Nonnull String texture) {
