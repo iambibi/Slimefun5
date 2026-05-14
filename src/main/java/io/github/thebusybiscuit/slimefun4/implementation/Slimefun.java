@@ -9,6 +9,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import javax.annotation.Nonnull;
@@ -540,7 +542,26 @@ public class Slimefun extends JavaPlugin implements SlimefunAddon {
                 StartupWarnings.invalidMinecraftVersion(getLogger(), version, getDescription().getVersion());
                 return true;
             } else {
-                getLogger().log(Level.WARNING, "We could not determine the version of Minecraft you were using? ({0})", Bukkit.getVersion());
+                String bukkitVersion = Bukkit.getVersion();
+                int parsedMajor = -1;
+                int parsedPatch = -1;
+
+                Matcher matcher = Pattern.compile("\\(MC: (\\d+)\\.(\\d+)(?:\\.(\\d+))?\\)").matcher(bukkitVersion);
+                if (matcher.find()) {
+                    parsedMajor = Integer.parseInt(matcher.group(1));
+                    parsedPatch = Integer.parseInt(matcher.group(2));
+                }
+
+                if (parsedMajor > 0) {
+                    for (MinecraftVersion supportedVersion : MinecraftVersion.values()) {
+                        if (supportedVersion.isMinecraftVersion(parsedMajor, parsedPatch)) {
+                            minecraftVersion = supportedVersion;
+                            return false;
+                        }
+                    }
+                }
+
+                getLogger().log(Level.WARNING, "We could not determine the version of Minecraft you were using? ({0})", bukkitVersion);
 
                 /*
                  * If we are unsure about it, we will assume "supported".

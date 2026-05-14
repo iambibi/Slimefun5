@@ -26,7 +26,7 @@ public class ColoredFireworkStar {
         return new ItemStackEditor(Material.FIREWORK_STAR)
                 .setDisplayName(name)
                 .setLore(lore)
-                .addFlags(VersionedItemFlag.HIDE_ADDITIONAL_TOOLTIP)
+                .addFlags(VersionedItemFlag.toItemFlags(VersionedItemFlag.HIDE_ADDITIONAL_TOOLTIP))
                 .andMetaConsumer(FireworkEffectMeta.class, meta -> meta.setEffect(effect))
                 .create();
     }

@@ -31,4 +31,8 @@ public class VersionedItemFlag {
             return null;
         }
     }
+
+    public static @Nonnull ItemFlag[] toItemFlags(@Nullable ItemFlag flag) {
+        return flag == null ? new ItemFlag[0] : new ItemFlag[] { flag };
+    }
 }

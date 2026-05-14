@@ -86,7 +86,9 @@ public class ItemGroup implements Keyed {
         ItemMeta meta = item.getItemMeta();
         meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
         meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-        meta.addItemFlags(VersionedItemFlag.HIDE_ADDITIONAL_TOOLTIP);
+        if (VersionedItemFlag.HIDE_ADDITIONAL_TOOLTIP != null) {
+            meta.addItemFlags(VersionedItemFlag.HIDE_ADDITIONAL_TOOLTIP);
+        }
         this.item.setItemMeta(meta);
         this.tier = tier;
     }
