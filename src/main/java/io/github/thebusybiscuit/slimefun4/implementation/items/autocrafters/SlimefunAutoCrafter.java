@@ -4,6 +4,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
+import io.github.bakedlibs.dough.data.persistent.PersistentDataAPI;
 import org.apache.commons.lang.Validate;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -62,12 +63,11 @@ public class SlimefunAutoCrafter extends AbstractAutoCrafter {
 
         if (state instanceof Skull skull) {
             // Read the stored value from persistent data storage
-            PersistentDataContainer container = skull.getPersistentDataContainer();
-            String value = container.get(recipeStorageKey, PersistentDataType.STRING);
+            String value = PersistentDataAPI.get(skull, recipeStorageKey, PersistentDataType.STRING);
             SlimefunItem item = SlimefunItem.getById(value);
 
             if (item != null) {
-                boolean enabled = !container.has(recipeEnabledKey, PersistentDataType.BYTE);
+                boolean enabled = !PersistentDataAPI.has(skull, recipeEnabledKey, PersistentDataType.BYTE);
                 AbstractRecipe recipe = AbstractRecipe.of(item, targetRecipeType);
                 recipe.setEnabled(enabled);
                 return recipe;
@@ -108,7 +108,7 @@ public class SlimefunAutoCrafter extends AbstractAutoCrafter {
                     recipe.show(menu, task);
                     menu.open(p);
 
-                    SoundEffect.AUTO_CRAFTER_UPDATE_RECIPE.playAt(b);;
+                    SoundEffect.AUTO_CRAFTER_UPDATE_RECIPE.playAt(b);
 
                     if (!task.isEmpty()) {
                         task.start(menu.toInventory());

@@ -255,10 +255,8 @@ public abstract class AbstractAutoCrafter extends SlimefunItem implements Energy
                 PersistentDataAPI.setString(skull, recipeStorageKey, recipe.toString());
             }
 
-            // Fixes #2899 - Update the BlockState if necessary
-            if (result.isSnapshot()) {
-                state.update(true, false);
-            }
+            // Always update the BlockState to ensure persistent data is saved to the block
+            state.update(true, false);
         }
     }
 
@@ -337,6 +335,9 @@ public abstract class AbstractAutoCrafter extends SlimefunItem implements Energy
                 PersistentDataAPI.setByte(skull, recipeEnabledKey, (byte) 1);
                 Slimefun.getLocalization().sendMessage(p, "messages.auto-crafting.temporarily-disabled");
             }
+
+            // Ensure the block state is updated to persist the changes
+            state.update(true, false);
         }
     }
 
