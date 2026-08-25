@@ -29,8 +29,8 @@
         <maven.compiler.testTarget>21</maven.compiler.testTarget>
 
         <!-- Spigot properties -->
-        <paper.version>26.1.2</paper.version>
-        <paper.version.detailed>61-stable</paper.version.detailed>
+        <paper.version>26.2</paper.version>
+        <paper.version.detailed>118-stable</paper.version.detailed>
         <paper.javadocs>https://hub.spigotmc.org/javadocs/spigot/</paper.javadocs>
 
         <!-- Default settings for sonarcloud.io -->
@@ -399,8 +399,8 @@
         <!-- This needs to be before Spigot because MockBukkit will fail otherwise. -->
         <dependency>
             <groupId>org.mockbukkit.mockbukkit</groupId>
-            <artifactId>mockbukkit-v26.1.2</artifactId>
-            <version>4.113.0</version>
+            <artifactId>mockbukkit-v26.2</artifactId>
+            <version>4.116.1</version>
             <scope>test</scope>
 
             <exclusions>
